@@ -1,8 +1,6 @@
 require "date"
 
 class SearchParams
-  DATE_FORMAT="YY-mm-dd"
-
   attr_reader :metric_id, :start_date, :end_date, :time_range
 
   def initialize(params)
@@ -16,7 +14,7 @@ class SearchParams
   def convert_month(month)
     return unless month
 
-    date = Date.parse(month, DATE_FORMAT)
+    date = Date.parse(month, "YY-mm-dd")
     convert_date(date)
   end
 
