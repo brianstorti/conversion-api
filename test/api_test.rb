@@ -7,7 +7,7 @@ class ApiTest < Minitest::Test
   include Rack::Test::Methods
 
   def app
-    Api
+    Api.set :csv_path, "test/assets/test.csv"
   end
 
   def test_returns_success
