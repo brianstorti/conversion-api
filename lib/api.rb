@@ -27,7 +27,7 @@ class Api < Sinatra::Application
     search_params = SearchParams.new(params)
     value = settings.finder.find(search_params)
 
-    halt(404) if value.nil?
+    halt(404) unless value
 
     response = { value: value }
 

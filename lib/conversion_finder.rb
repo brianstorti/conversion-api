@@ -5,6 +5,11 @@ class ConversionFinder
     @csv_path = csv_path
   end
 
+  # Runs through the csv file trying to find a match
+  # for `search_params`.
+  #
+  # @param search_param [SearchParam] the parameters used to build the search
+  # @return [String] conversion value that was found
   def find(search_params)
     search = { "metric_id" => search_params.metric_id,
                "time_range_length" => search_params.time_range,
