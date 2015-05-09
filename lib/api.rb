@@ -2,6 +2,7 @@ require "sinatra"
 require "json"
 
 require_relative "search_params"
+require_relative "conversion_finder"
 
 class Api < Sinatra::Application
   get "/conversion" do
@@ -15,6 +16,9 @@ class Api < Sinatra::Application
       return errors.to_json
     end
 
-    "so modular"
+    finder = ConversionFinder.new
+    value = finder.find(search_params)
+
+    { value: value }.to_json
   end
 end
