@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+
 require_relative '../lib/conversion_finder'
 require_relative '../lib/search_params'
 
