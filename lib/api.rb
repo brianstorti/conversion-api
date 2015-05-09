@@ -8,7 +8,7 @@ require_relative "conversion_finder"
 
 class Api < Sinatra::Application
   configure do
-    set :csv_path, "assets/metrics_over_time_view.csv"
+    set :finder, ConversionFinder.new("assets/metrics_over_time_view.csv")
   end
 
   get "/conversion" do
@@ -25,8 +25,7 @@ class Api < Sinatra::Application
     cache_control :public, max_age: 60
 
     search_params = SearchParams.new(params)
-    finder = ConversionFinder.new(settings.csv_path)
-    value = finder.find(search_params)
+    value = settings.finder.find(search_params)
 
     halt(404) if value.nil?
 

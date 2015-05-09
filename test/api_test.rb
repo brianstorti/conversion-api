@@ -7,12 +7,23 @@ class ApiTest < Minitest::Test
   include Rack::Test::Methods
 
   def app
-    Api.set :csv_path, "test/assets/test.csv"
+    Api.set :finder, ConversionFinder.new("test/assets/test.csv")
   end
 
   def test_finds_conversion
     get "/conversion?metric_id=15&date=2014-07-05"
+
     assert_equal 200, last_response.status
+
+    response = { value: 1 }
+    assert_equal response.to_json, last_response.body
+  end
+
+  def test_adds_cache_headers
+    get "/conversion?metric_id=15&date=2014-07-05"
+
+    assert_equal "public, max-age=60", last_response.header["Cache-Control"]
+    assert !last_response.header["Etag"].nil?
   end
 
   def test_returns_not_found_status
