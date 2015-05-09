@@ -1,4 +1,4 @@
-require "sinatra"
+require "sinatra/base"
 require "rack-cache"
 require "json"
 
@@ -17,18 +17,12 @@ class Api < Sinatra::Application
     search_params = SearchParams.new(params)
     errors = search_params.validate!
 
-    if errors.any?
-      status 400
-      return errors.to_json
-    end
+    halt(400, errors.to_json) if errors.any?
 
     finder = ConversionFinder.new(settings.csv_path)
     value = finder.find(search_params)
 
-    if value.nil?
-      status 404
-      return
-    end
+    halt(404) if value.nil?
 
     response = { value: value }
 
