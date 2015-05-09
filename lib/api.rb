@@ -1,4 +1,5 @@
 require "sinatra/base"
+require 'sinatra/param'
 require "rack-cache"
 require "json"
 
@@ -11,14 +12,20 @@ class Api < Sinatra::Application
   end
 
   get "/conversion" do
-    content_type "application/json"
+    param :metric_id, Integer, required: true
+    param :date, Date
+    param :end_date, Date
+    param :month, String,
+          format: /[0-9]4-[0-9]2/,
+          transform: lambda { |date| "#{date}-01" }
+
+    one_of :date, :month
+    any_of :date, :month
+
+    content_type :json
     cache_control :public, max_age: 60
 
     search_params = SearchParams.new(params)
-    errors = search_params.validate!
-
-    halt(400, errors.to_json) if errors.any?
-
     finder = ConversionFinder.new(settings.csv_path)
     value = finder.find(search_params)
 
