@@ -17,4 +17,19 @@ class SearchParamsTest < Minitest::Test
     assert_equal end_date_john_time, params.end_date
     assert_equal 7, params.time_range
   end
+
+  def test_knows_time_range_for_day
+    params = SearchParams.new({ "date" => Date.new })
+    assert_equal 1, params.time_range
+  end
+
+  def test_knows_time_range_for_week
+    params = SearchParams.new({ "date" => Date.new, "end_date" => Date.new })
+    assert_equal 7, params.time_range
+  end
+
+  def test_knows_time_range_for_month
+    params = SearchParams.new({ "month" => "2011-1-1" })
+    assert_equal 30, params.time_range
+  end
 end
