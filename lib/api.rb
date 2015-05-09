@@ -11,7 +11,6 @@ class Api < Sinatra::Application
   end
 
   get "/conversion" do
-    sleep 5
     content_type "application/json"
     cache_control :public, max_age: 60
 
