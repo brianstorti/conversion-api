@@ -1,5 +1,5 @@
 require "sinatra/base"
-require 'sinatra/param'
+require "sinatra/param"
 require "rack-cache"
 require "json"
 
@@ -16,10 +16,9 @@ class Api < Sinatra::Application
     param :date, Date
     param :end_date, Date
     param :month, String,
-          format: /[0-9]4-[0-9]2/,
+          format: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
           transform: lambda { |date| "#{date}-01" }
 
-    one_of :date, :month
     any_of :date, :month
 
     content_type :json
