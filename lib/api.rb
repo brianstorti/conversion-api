@@ -1,4 +1,5 @@
 require "sinatra"
+require "rack-cache"
 require "json"
 
 require_relative "search_params"
@@ -10,7 +11,9 @@ class Api < Sinatra::Application
   end
 
   get "/conversion" do
+    sleep 5
     content_type "application/json"
+    cache_control :public, max_age: 60
 
     search_params = SearchParams.new(params)
     errors = search_params.validate!
@@ -28,6 +31,10 @@ class Api < Sinatra::Application
       return
     end
 
-    { value: value }.to_json
+    response = { value: value }
+
+    etag Digest::MD5.hexdigest(response.to_s)
+
+    response.to_json
   end
 end
