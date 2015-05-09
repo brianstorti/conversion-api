@@ -21,7 +21,7 @@ class ConversionFinderTest < Minitest::Test
 
   def test_finds_conversion_value_for_month
     search_params = SearchParams.new({"metric_id" => "15",
-                                      "date" => "2014-07"})
+                                      "month" => "2014-07"})
 
     assert_equal 5, finder.find(search_params)
   end

@@ -1,13 +1,15 @@
 require 'date'
 
 class SearchParams
+  DATE_FORMAT="YY-mm-dd"
+
   attr_reader :start_date, :end_date, :time_range
 
   def initialize(params)
     @metric_id = params["metric_id"]
-    @start_date = process_start_date(params["date"])
-    @end_date = process_end_date(params["end_date"])
-    @time_range = find_time_range(params["date"], params["end_date"])
+    @start_date = process_date(params["date"]) || process_month(params["month"])
+    @end_date = process_date(params["end_date"])
+    @time_range = find_time_range(params["end_date"], params["month"])
   end
 
   def metric_id
@@ -29,31 +31,28 @@ class SearchParams
   end
 
   private
-  def process_start_date(date)
+  def process_date(date)
     return unless date
 
-    year, month, day = date.split("-").map(&:to_i)
-    day ||= 1
-    john_time_format(year, month, day)
+    date = Date.parse(date, DATE_FORMAT)
+    john_time_format(date)
   end
 
-  def process_end_date(end_date)
-    return unless end_date
+  def process_month(month)
+    return unless month
 
-    year, month, day = end_date.split("-").map(&:to_i)
-    john_time_format(year, month, day)
+    default_day = "1"
+    date = Date.parse("#{month}-#{default_day}", DATE_FORMAT)
+    john_time_format(date)
   end
 
-  def find_time_range(date, end_date)
-    return unless date
-
+  def find_time_range(end_date, month)
+    return 30 if month
     return 7 if end_date
-    return 30 if date.split("-").size == 2
     return 1
   end
 
-  def john_time_format(year, month, day)
-    date = Date.new(year, month, day)
+  def john_time_format(date)
     base_date = Date.new(2009, 01, 01)
 
     (date - base_date).to_i
