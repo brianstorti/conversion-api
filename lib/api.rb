@@ -23,6 +23,11 @@ class Api < Sinatra::Application
     finder = ConversionFinder.new(settings.csv_path)
     value = finder.find(search_params)
 
+    if value.nil?
+      status 404
+      return
+    end
+
     { value: value }.to_json
   end
 end
