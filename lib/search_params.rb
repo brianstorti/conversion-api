@@ -5,6 +5,7 @@ class SearchParams
 
   def validate!
     errors = []
+
     if @metric_id.nil?
       errors << { parameter: "metric_id", error: "required parameter" }
     end
