@@ -24,6 +24,11 @@ class SearchParams
     return 1
   end
 
+  # Converts a date to the JohnTime format.
+  # The JohnTime format is the number of days since Jan 1, 2009
+  #
+  # @param date [Date] the date to be converted
+  # @return [Integer] number of days from Jan 1, 2009 to `date`
   def convert_date(date)
     return unless date
 
