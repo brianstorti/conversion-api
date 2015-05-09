@@ -1,7 +1,7 @@
-require 'date'
-require 'minitest/autorun'
+require "date"
+require "minitest/autorun"
 
-require_relative '../lib/search_params'
+require_relative "../lib/search_params"
 
 class SearchParamsTest < Minitest::Test
   def test_creates_parameters

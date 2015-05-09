@@ -1,7 +1,7 @@
-require 'minitest/autorun'
+require "minitest/autorun"
 
-require_relative '../lib/conversion_finder'
-require_relative '../lib/search_params'
+require_relative "../lib/conversion_finder"
+require_relative "../lib/search_params"
 
 class ConversionFinderTest < Minitest::Test
   def test_finds_conversion_value_for_specific_date
