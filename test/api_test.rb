@@ -20,8 +20,28 @@ class ApiTest < Minitest::Test
     assert_equal 404, last_response.status
   end
 
-  def test_returns_bad_request_for_invalid_parameters
+  def test_returns_bad_request_for_missing_metric_id
     get "/conversion"
+    assert_equal 400, last_response.status
+  end
+
+  def test_returns_bad_request_for_invalid_date
+    get "/conversion?metrid_id=1&date=foo"
+    assert_equal 400, last_response.status
+  end
+
+  def test_returns_bad_request_for_invalid_end_date
+    get "/conversion?metrid_id=1&date=2011-01-01&end_date=foo"
+    assert_equal 400, last_response.status
+  end
+
+  def test_returns_bad_request_for_invalid_month
+    get "/conversion?metrid_id=1&month=foo"
+    assert_equal 400, last_response.status
+  end
+
+  def test_returns_bad_request_for_date_and_month_in_the_same_request
+    get "/conversion?metrid_id=1&month=2011-01&date=2011-02-02"
     assert_equal 400, last_response.status
   end
 end
