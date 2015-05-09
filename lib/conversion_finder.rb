@@ -1,8 +1,8 @@
 require 'csv'
 
 class ConversionFinder
-  def initialize(location = "assets/metrics_over_time_view.csv")
-    @location = location
+  def initialize(csv_path)
+    @csv_path = csv_path
   end
 
   def find(search_params)
@@ -15,7 +15,7 @@ class ConversionFinder
     result = ""
     options = { headers: true, converters: [ :numeric ] }
 
-    CSV.open(@location, "r", options) do |csv|
+    CSV.open(@csv_path, "r", options) do |csv|
       result = csv.find do |row|
         found = true
         search.keys.each do |key|
