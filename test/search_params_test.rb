@@ -5,7 +5,7 @@ require_relative "../lib/search_params"
 
 class SearchParamsTest < Minitest::Test
   def test_creates_parameters
-    params = SearchParams.new({ "metric_id" => "1",
+    params = SearchParams.new({ "metric_id" => 1,
                                 "date" => Date.new(2014, 3, 1),
                                 "end_date" => Date.new(2014, 3, 8) })
 

@@ -3,17 +3,13 @@ require "date"
 class SearchParams
   DATE_FORMAT="YY-mm-dd"
 
-  attr_reader :start_date, :end_date, :time_range
+  attr_reader :metric_id, :start_date, :end_date, :time_range
 
   def initialize(params)
     @metric_id = params["metric_id"]
     @start_date = convert_date(params["date"]) || convert_month(params["month"])
     @end_date = convert_date(params["end_date"])
     @time_range = find_time_range(params["end_date"], params["month"])
-  end
-
-  def metric_id
-    @metric_id.to_i
   end
 
   private
