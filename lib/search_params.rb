@@ -21,15 +21,19 @@ class SearchParams
       errors << { parameter: "metric_id", error: "required parameter" }
     end
 
+    if @start_date.nil?
+      errors << { parameter: "date", error: "required parameter (format: yyyy-mm or yyyy-mm-dd)" }
+    end
+
     errors
   end
 
   private
   def process_start_date(date)
     return unless date
+
     year, month, day = date.split("-").map(&:to_i)
     day ||= 1
-
     john_time_format(year, month, day)
   end
 
@@ -50,6 +54,8 @@ class SearchParams
 
   def john_time_format(year, month, day)
     date = Date.new(year, month, day)
-    (date - Date.new(2009, 01, 01)).to_i
+    base_date = Date.new(2009, 01, 01)
+
+    (date - base_date).to_i
   end
 end

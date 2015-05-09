@@ -3,11 +3,13 @@ require 'minitest/autorun'
 require_relative '../lib/search_params'
 
 class SearchParamsTest < Minitest::Test
-  def test_validates_required_metric_id
+  def test_validates_required_parameters
     params = SearchParams.new({})
     errors = params.validate!
 
-    assert_equal [{parameter: "metric_id", error: "required parameter"}], errors
+    metric_id_error = { parameter: "metric_id", error: "required parameter" }
+    date_error = { parameter: "date", error: "required parameter (format: yyyy-mm or yyyy-mm-dd)" }
+    assert_equal [metric_id_error, date_error], errors
   end
 
   def test_creates_parameters
