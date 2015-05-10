@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "rack/test"
 
-require_relative 'test_helper'
+require_relative "test_helper"
 require_relative "../lib/api"
 
 class ApiTest < Minitest::Test

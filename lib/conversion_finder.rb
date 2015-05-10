@@ -25,13 +25,14 @@ class ConversionFinder
   end
 
   private
+
   def find_row(search)
-    options = { headers: true, converters: [ :numeric ] }
+    options = { headers: true, converters: [:numeric] }
 
     CSV.parse(@source.content, options) do |row|
       found = true
       search.keys.each do |key|
-        found = found && row[key] == search[key]
+        found &&= row[key] == search[key]
       end
 
       return row if found

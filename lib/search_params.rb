@@ -2,6 +2,7 @@ require "date"
 
 class SearchParams
   attr_reader :metric_id, :params
+
   private :params
 
   def initialize(params)
@@ -20,10 +21,11 @@ class SearchParams
   def time_range
     return 7 if params["end_date"]
     return 1 if params["date"]
-    return 30
+    30
   end
 
   private
+
   def convert_month(month)
     return unless month
 

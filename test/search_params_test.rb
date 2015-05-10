@@ -1,7 +1,7 @@
 require "date"
 require "minitest/autorun"
 
-require_relative 'test_helper'
+require_relative "test_helper"
 require_relative "../lib/search_params"
 
 class SearchParamsTest < Minitest::Test
