@@ -1,6 +1,6 @@
 # The idea is that we can switch between different datasources easily.
 # As long as it responds to `content` with a csv, it doesn't matter if this
-# csvis comming from a the local file system, from a database, or an external
+# csv is comming from a the local file system, from a database, or an external
 # service.
 
 module DataSource

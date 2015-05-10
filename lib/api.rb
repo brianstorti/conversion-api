@@ -11,6 +11,9 @@ class Api < Sinatra::Application
     set :finder, ConversionFinder.new
   end
 
+  # GET /conversion?metric_id=123&month=2015-03
+  # GET /conversion?metric_id=123&date=2015-12-01
+  # GET /conversion?metric_id=123&date=2015-12-01&end_date=2015-12-08
   get "/conversion" do
     param :metric_id, Integer, required: true
     param :date, Date
