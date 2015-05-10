@@ -8,3 +8,7 @@ gem "rack-cache"
 gem "json"
 
 gem "byebug"
+
+group :test do
+  gem "minitest-reporters"
+end
