@@ -8,8 +8,17 @@ class ApiTest < Minitest::Test
   include Rack::Test::Methods
 
   def app
-    source = DataSource::FileSystem.new("test/assets/test.csv")
-    Api.set :finder, ConversionFinder.new(source)
+    Api
+  end
+
+  def setup
+    finder_stub = Minitest::Mock.new
+    to_return_1 = 1
+    when_called_with_any_param = [SearchParams]
+
+    finder_stub.expect(:find, to_return_1, when_called_with_any_param)
+
+    Api.set :finder, finder_stub
   end
 
   def test_finds_conversion
@@ -29,6 +38,10 @@ class ApiTest < Minitest::Test
   end
 
   def test_returns_not_found_status
+    finder = Minitest::Mock.new
+    finder.expect(:find, nil, [SearchParams])
+    Api.set :finder, finder
+
     get "/conversion?metric_id=123&date=2014-07-05"
     assert_equal 404, last_response.status
   end
