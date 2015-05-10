@@ -17,7 +17,7 @@ class Api < Sinatra::Application
     param :end_date, Date
     param :month, String,
           format: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-          transform: lambda { |date| "#{date}-01" }
+          transform: ->(date) { "#{date}-01" }
 
     any_of :date, :month
 
