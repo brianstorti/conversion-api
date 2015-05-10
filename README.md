@@ -5,7 +5,8 @@ API to find conversion data in a csv.
 #### Setup
 
 Install the dependencies: `bundle install`  
-Run the tests: `rake`  
+Run the tests: `rake test`  
+Check your style: `rake rubocop`  
 Run the server: `rackup`  
 
 #### Examples
