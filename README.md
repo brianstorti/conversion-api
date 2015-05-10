@@ -11,7 +11,7 @@ Run the server: `rackup`
 
 #### Examples
 
-Searching a conversion value for an specific date:
+Searching a conversion value for a specific date:
 
 ```bash
 $ curl "http://localhost:9292/conversion?metric_id=15&date=2014-07-05"
