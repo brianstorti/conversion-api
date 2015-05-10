@@ -4,9 +4,9 @@ API to find conversion data in a csv.
 
 #### Setup
 
-Install the dependencies: `bundle install`
-Run the tests: `rake`
-Run the server: `rackup`
+Install the dependencies: `bundle install`  
+Run the tests: `rake`  
+Run the server: `rackup`  
 
 #### Examples
 
