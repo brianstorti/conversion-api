@@ -5,7 +5,8 @@ require_relative "../lib/search_params"
 
 class ConversionFinderTest < Minitest::Test
   def finder
-    ConversionFinder.new("test/assets/test.csv")
+    source = DataSource::FileSystem.new("test/assets/test.csv")
+    ConversionFinder.new(source)
   end
 
   def test_finds_conversion_value_for_specific_date

@@ -1,8 +1,10 @@
 require "csv"
 
+require_relative "data_sources/file_system"
+
 class ConversionFinder
-  def initialize(csv_path = "assets/metrics_over_time_view.csv")
-    @csv_path = csv_path
+  def initialize(source = DataSource::FileSystem.new)
+    @source = source
   end
 
   # Runs through the csv file trying to find a match
@@ -26,7 +28,7 @@ class ConversionFinder
   def find_row(search)
     options = { headers: true, converters: [ :numeric ] }
 
-    CSV.foreach(@csv_path, options) do |row|
+    CSV.parse(@source.content, options) do |row|
       found = true
       search.keys.each do |key|
         found = found && row[key] == search[key]

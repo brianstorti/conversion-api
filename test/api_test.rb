@@ -7,7 +7,8 @@ class ApiTest < Minitest::Test
   include Rack::Test::Methods
 
   def app
-    Api.set :finder, ConversionFinder.new("test/assets/test.csv")
+    source = DataSource::FileSystem.new("test/assets/test.csv")
+    Api.set :finder, ConversionFinder.new(source)
   end
 
   def test_finds_conversion
