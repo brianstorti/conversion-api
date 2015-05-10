@@ -8,7 +8,7 @@ require_relative "conversion_finder"
 
 class Api < Sinatra::Application
   configure do
-    set :finder, ConversionFinder.new("assets/metrics_over_time_view.csv")
+    set :finder, ConversionFinder.new
   end
 
   get "/conversion" do

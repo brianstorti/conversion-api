@@ -1,7 +1,7 @@
 require "csv"
 
 class ConversionFinder
-  def initialize(csv_path)
+  def initialize(csv_path = "assets/metrics_over_time_view.csv")
     @csv_path = csv_path
   end
 
@@ -26,15 +26,13 @@ class ConversionFinder
   def find_row(search)
     options = { headers: true, converters: [ :numeric ] }
 
-    CSV.open(@csv_path, "r", options) do |csv|
-      return csv.find do |row|
-        found = true
-        search.keys.each do |key|
-          found = found && row[key] == search[key]
-        end
-
-        found
+    CSV.foreach(@csv_path, options) do |row|
+      found = true
+      search.keys.each do |key|
+        found = found && row[key] == search[key]
       end
+
+      return row if found
     end
   end
 end
