@@ -10,6 +10,7 @@ gem "json"
 gem "byebug"
 
 group :test do
+  gem "rack-test"
   gem "minitest-reporters"
 end
 
