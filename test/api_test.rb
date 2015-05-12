@@ -34,7 +34,7 @@ class ApiTest < Minitest::Test
     get "/conversion?metric_id=15&date=2014-07-05"
 
     assert_equal "public, max-age=60", last_response.header["Cache-Control"]
-    assert !last_response.header["Etag"].nil?
+    refute last_response.header["Etag"].nil?
   end
 
   def test_returns_not_found_status
