@@ -15,6 +15,8 @@ class Api < Sinatra::Application
   # GET /conversion?metric_id=123&date=2015-12-01
   # GET /conversion?metric_id=123&date=2015-12-01&end_date=2015-12-08
   get "/conversion" do
+    content_type :json
+
     param :metric_id, Integer, required: true
     param :date, Date
     param :end_date, Date
@@ -24,7 +26,6 @@ class Api < Sinatra::Application
 
     any_of :date, :month
 
-    content_type :json
     cache_control :public, max_age: 60
 
     search_params = SearchParams.new(params)
