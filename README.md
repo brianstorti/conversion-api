@@ -40,4 +40,4 @@ $ curl "http://localhost:9292/conversion?metric_id=15&date=2015-04-27&end_date=2
 
 * I'm just using `sinatra-param`'s default error handling. Ideally I'd like to have better/custom error messages for each problem. (e.g. When a required query param is missing, it just says "Parameter is required".)
 
-* The csv search is vary naive. It just loops through each line, sequentially, trying to find a match. This is not really a problem for this small sampling data (`200ms` in the worst case), just it can get embarrassing with a big csv.
+* The csv search is very naive. It just loops through each line, sequentially, trying to find a match. This is not really a problem for this small sampling data (`200ms` in the worst case), just it can get embarrassing with a big csv.
