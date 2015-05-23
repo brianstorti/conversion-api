@@ -6,6 +6,9 @@ gem "sinatra"
 gem "sinatra-param", require: "sinatra/param"
 gem "rack-cache"
 gem "json"
+gem "sinatra-activerecord"
+gem "pg"
+gem "rake"
 
 gem "byebug"
 
