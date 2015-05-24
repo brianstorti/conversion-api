@@ -1,6 +1,5 @@
 require "sinatra/base"
 require "sinatra/param"
-require "sinatra/activerecord"
 require "rack-cache"
 require "json"
 

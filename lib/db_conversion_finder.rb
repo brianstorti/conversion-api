@@ -1,3 +1,5 @@
+require "sinatra/activerecord"
+
 Conversion = Class.new(ActiveRecord::Base)
 
 class DBConversionFinder
