@@ -6,10 +6,11 @@ require "json"
 
 require_relative "search_params"
 require_relative "conversion_finder"
+require_relative "db_conversion_finder"
 
 class Api < Sinatra::Application
   configure do
-    set :finder, ConversionFinder.new
+    set :finder, DBConversionFinder.new
   end
 
   # GET /conversion?metric_id=123&month=2015-03
