@@ -12,7 +12,7 @@ Rake::TestTask.new("test") do |t|
   t.pattern = "test/*_test.rb"
 end
 
-task :load_csv do
+task :import_csv do
   file_path = File.join(File.dirname(__FILE__),
                         "assets",
                         "metrics_over_time_view.csv")
