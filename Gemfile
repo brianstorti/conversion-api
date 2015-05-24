@@ -15,6 +15,7 @@ gem "byebug"
 group :test do
   gem "rack-test"
   gem "minitest-reporters"
+  gem "database_cleaner"
 end
 
 group :development do
