@@ -3,3 +3,7 @@ Style/StringLiterals:
 
 Documentation:
     Enabled: false
+
+AllCops:
+  Excludes:
+    - db/schema.rb
