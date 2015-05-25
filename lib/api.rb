@@ -4,7 +4,6 @@ require "rack-cache"
 require "json"
 
 require_relative "search_params"
-require_relative "conversion_finder"
 require_relative "db_conversion_finder"
 
 class Api < Sinatra::Application
