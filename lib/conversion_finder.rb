@@ -19,14 +19,12 @@ class ConversionFinder
 
     search["end_date"] = search_params.end_date if search_params.end_date
 
-    result = find_row(search)
-
-    result["value"] if result
+    find_value(search)
   end
 
   private
 
-  def find_row(search)
+  def find_value(search)
     options = { headers: true, converters: [:numeric] }
 
     CSV.parse(@source.content, options) do |row|
@@ -35,7 +33,7 @@ class ConversionFinder
         found &&= row[key] == search[key]
       end
 
-      return row if found
+      return row["value"] if found
     end
   end
 end
