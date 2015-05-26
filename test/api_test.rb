@@ -16,7 +16,9 @@ class ApiTest < Minitest::Test
     to_return_1 = 1
     when_called_with_any_param = [SearchParams]
 
-    finder_stub.expect(:find, to_return_1, when_called_with_any_param)
+    finder_stub.expect(:find_for_params,
+                       to_return_1,
+                       when_called_with_any_param)
 
     Api.set :finder, finder_stub
   end
@@ -39,7 +41,7 @@ class ApiTest < Minitest::Test
 
   def test_returns_not_found_status
     finder = Minitest::Mock.new
-    finder.expect(:find, nil, [SearchParams])
+    finder.expect(:find_for_params, nil, [SearchParams])
     Api.set :finder, finder
 
     get "/conversion?metric_id=123&date=2014-07-05"

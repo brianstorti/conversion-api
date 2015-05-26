@@ -2,12 +2,12 @@ require "minitest/autorun"
 require "database_cleaner"
 
 require_relative "test_helper"
-require_relative "../lib/db_conversion_finder"
+require_relative "../lib/conversion"
 require_relative "../lib/search_params"
 
 DatabaseCleaner.strategy = :transaction
 
-class DBConversionFinderTest < Minitest::Test
+class ConversionTest < Minitest::Test
   def setup
     DatabaseCleaner.start
 
@@ -29,7 +29,7 @@ class DBConversionFinderTest < Minitest::Test
     search_params = SearchParams.new("metric_id" => 15,
                                      "date" => Date.new(2014, 7, 5))
 
-    assert_equal 1, DBConversionFinder.new.find(search_params)
+    assert_equal 1, Conversion.find_for_params(search_params)
   end
 
   def test_finds_conversion_value_date_range
@@ -37,13 +37,13 @@ class DBConversionFinderTest < Minitest::Test
                                      "date" => Date.new(2014, 7, 5),
                                      "end_date" => Date.new(2014, 7, 12))
 
-    assert_equal 2, DBConversionFinder.new.find(search_params)
+    assert_equal 2, Conversion.find_for_params(search_params)
   end
 
   def test_finds_conversion_value_for_month
     search_params = SearchParams.new("metric_id" => 15,
                                      "month" => "2014-07-01")
 
-    assert_equal 3, DBConversionFinder.new.find(search_params)
+    assert_equal 3, Conversion.find_for_params(search_params)
   end
 end

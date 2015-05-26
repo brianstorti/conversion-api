@@ -4,11 +4,11 @@ require "rack-cache"
 require "json"
 
 require_relative "search_params"
-require_relative "db_conversion_finder"
+require_relative "conversion"
 
 class Api < Sinatra::Application
   configure do
-    set :finder, DBConversionFinder.new
+    set :finder, Conversion
   end
 
   # GET /conversion?metric_id=123&month=2015-03
@@ -29,7 +29,7 @@ class Api < Sinatra::Application
     cache_control :public, max_age: 60
 
     search_params = SearchParams.new(params)
-    value = settings.finder.find(search_params)
+    value = settings.finder.find_for_params(search_params)
 
     halt(404) unless value
 
